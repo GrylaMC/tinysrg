@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'eclipse'
 	id 'maven-publish'
+	id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
 repositories {
@@ -13,12 +14,16 @@ repositories {
 }
 
 group = "io.github.nuclearfarts"
-version = "0.2.1"
+version = "0.2.2"
 archivesBaseName = "tinysrg"
 
 dependencies {
 	implementation 'net.fabricmc:tiny-mappings-parser:0.3.0+build.17'
 	implementation 'com.google.guava:guava:28.0-jre'
+}
+
+shadowJar {
+	archiveClassifier.set('')
 }
 
 publishing {
@@ -28,7 +33,7 @@ publishing {
 			artifactId project.archivesBaseName
 			version project.version
 
-			artifact (jar)
+			artifact shadowJar
 		}
 	}
 }
